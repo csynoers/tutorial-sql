@@ -1,2 +1,5 @@
 # digunakan untuk menampilkan format tanggal tanpa jam
   DATE_FORMAT(t1.c1, '%W,  %d %b %Y') AS c1_mod
+
+# digunakan untuk menampilkan format rupiah (idr/indonesian currency) from float number or int or double or decimal
+  concat('Rp. ', format( t1.c1, 2)) AS c1_mod
