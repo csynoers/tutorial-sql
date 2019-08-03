@@ -1,0 +1,2 @@
+# digunakan untuk menampilkan format tanggal tanpa jam
+  DATE_FORMAT(t1.c1, '%W,  %d %b %Y') AS c1_mod
