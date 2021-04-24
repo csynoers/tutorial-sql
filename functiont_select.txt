@@ -37,3 +37,21 @@
 
 # digunakan untuk menampilkan format rupiah (idr/indonesian currency) from float number or int or double or decimal
   concat('Rp. ', format( t1.c1, 2)) AS c1_mod
+
+# digunakan untuk mendapatkan statistik visitor mingguan
+  SET @0 = CURDATE(),
+	@1 = SUBDATE(CURDATE(), 1),
+	@2 = SUBDATE(CURDATE(), 2),
+    @3 = SUBDATE(CURDATE(), 3),
+    @4 = SUBDATE(CURDATE(), 4),
+    @5 = SUBDATE(CURDATE(), 5),
+	@6 = SUBDATE(CURDATE(), 6);
+    
+SELECT
+	(SELECT COUNT(*) FROM statistik WHERE tanggal=@0) as hari_sub_0,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@1) as hari_sub_1,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@2) as hari_sub_2,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@3) as hari_sub_3,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@4) as hari_sub_4,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@5) as hari_sub_5,
+    (SELECT COUNT(*) FROM statistik WHERE tanggal=@6) as hari_sub_6;
