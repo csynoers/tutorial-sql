@@ -38,7 +38,7 @@
 # digunakan untuk menampilkan format rupiah (idr/indonesian currency) from float number or int or double or decimal
   concat('Rp. ', format( t1.c1, 2)) AS c1_mod
 
-# digunakan untuk mendapatkan statistik visitor mingguan
+# digunakan untuk mendapatkan statistik visitor mingguan dalam 1 minggu terakhir
   SET @0 = CURDATE(),
 	@1 = SUBDATE(CURDATE(), 1),
 	@2 = SUBDATE(CURDATE(), 2),
@@ -55,3 +55,33 @@ SELECT
     (SELECT COUNT(*) FROM statistik WHERE tanggal=@4) as hari_sub_4,
     (SELECT COUNT(*) FROM statistik WHERE tanggal=@5) as hari_sub_5,
     (SELECT COUNT(*) FROM statistik WHERE tanggal=@6) as hari_sub_6;
+
+
+# digunakan untuk mendapatkan statistik visitor bulanan dalam 1 tahun terakhir    
+SET 
+	@1 = DATE_FORMAT(CURRENT_DATE(),'%Y-%m'),
+    @2 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH),'%Y-%m'),
+    @3 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 2 MONTH),'%Y-%m'),
+    @4 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 3 MONTH),'%Y-%m'),
+    @5 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 4 MONTH),'%Y-%m'),
+    @6 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 5 MONTH),'%Y-%m'),
+    @7 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 6 MONTH),'%Y-%m'),
+    @8 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 7 MONTH),'%Y-%m'),
+    @9 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 8 MONTH),'%Y-%m'),
+    @10 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 9 MONTH),'%Y-%m'),
+    @11 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 10 MONTH),'%Y-%m'),
+    @12 = DATE_FORMAT(DATE_SUB(CURRENT_DATE(), INTERVAL 11 MONTH),'%Y-%m');
+    
+ SELECT 
+ 	(SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@1) AS bulan_1,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@2) AS bulan_2,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@3) AS bulan_3,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@4) AS bulan_4,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@5) AS bulan_5,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@6) AS bulan_6,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@7) AS bulan_7,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@8) AS bulan_8,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@9) AS bulan_9,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@10) AS bulan_10,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@11) AS bulan_11,
+    (SELECT COUNT(*) FROM statistik WHERE DATE_FORMAT(statistik.tanggal,'%Y-%m')=@12) AS bulan_12;
